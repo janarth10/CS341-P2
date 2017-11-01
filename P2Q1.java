@@ -24,6 +24,15 @@ public class P2Q1 {
             V2[i] = Integer.parseInt(V2Strings[i]);
         }
 
+//        System.out.println("value1: ");
+//        for(int i: V1){
+//            System.out.println(i);
+//        }
+//        System.out.println("value2: ");
+//        for(int i: V2){
+//            System.out.println(i);
+//        }
+
         int[][][] M = new int[numOfItems][W1+1][W2+1];
         for(int i = 0; i < numOfItems; i++){
             for(int w1 = 0; w1 <= W1; w1++){
@@ -56,6 +65,9 @@ public class P2Q1 {
                                 V1[i] + M[i-1][w1 - weights[i]][w2]),
                                 V2[i] + M[i-1][w1][w2 - weights[i]]);
                     }
+
+//                    System.out.printf("M[%d][%d][%d] = ",i, w1, w2);
+//                    System.out.println(M[i][w1][w2]);
                 }
             }
         }
@@ -90,11 +102,11 @@ public class P2Q1 {
 //                    } else if (difference == V2[i] && weights[i] <= w2) {
 //                        bag2.add(0, i);
 //                        w2 -= weights[i];
-                    if(weights[i] <= w1 && M[i][w1][w2] - M[i-1][w1 - weights[i]][w2] == difference){
+                    if(weights[i] <= w1 && M[i][w1][w2] - M[i-1][w1 - weights[i]][w2] == difference && V1[i] == difference){
                         bag1.add(0, i);
                         w1 -= weights[i];
                     }
-                    else if(weights[i] <= w2 && M[i][w1][w2] - M[i-1][w1][w2 - weights[i]] == difference){
+                    else if(weights[i] <= w2 && M[i][w1][w2] - M[i-1][w1][w2 - weights[i]] == difference && V2[i] == difference){
                         bag2.add(0, i);
                         w2 -= weights[i];
                     }
