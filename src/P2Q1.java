@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,10 +16,29 @@ public class P2Q1 {
         String[] weightStrings = scan.nextLine().split(" ");
         String[] V1Strings = scan.nextLine().split(" ");
         String[] V2Strings = scan.nextLine().split(" ");
+
+//        int numOfItems = 0;
+//        String[] weightStrings = new String[0];
+//        String[] V1Strings = new String[0];
+//        String[] V2Strings = new String[0];
+//        int W1 = 0;
+//        int W2 = 0;
+//        try {
+//            FileReader fr = new FileReader("p_test");
+//            BufferedReader reader = new BufferedReader(fr);
+//
+//            numOfItems = Integer.parseInt(reader.readLine());
+//            String[] limits = reader.readLine().split(" ");
+//            W1 = Integer.parseInt(limits[0]);
+//            W2 = Integer.parseInt(limits[1]);
+//            weightStrings = reader.readLine().split(" ");
+//            V1Strings = reader.readLine().split(" ");
+//            V2Strings = reader.readLine().split(" ");
+//        }catch(Exception e){}
+
         int[] weights = new int[numOfItems];
         int[] V1 = new int[numOfItems];
         int[] V2 = new int[numOfItems];
-
         for(int i = 0; i < numOfItems; i++){
             weights[i] = Integer.parseInt(weightStrings[i]);
             V1[i] = Integer.parseInt(V1Strings[i]);
@@ -91,27 +112,16 @@ public class P2Q1 {
             else if(i > 0){
                 int difference = M[i][w1][w2] - M[i - 1][w1][w2];
                 if (difference != 0) {
-//                    if(difference == V1[i] && weights[i] <= w1 && difference == V2[i] && weights[i] <= w2 &&
-//                            w2 < w1){
-//                        bag2.add(0, i);
-//                        w2 -= weights[i];
-//                    }
-//                    if (difference == V1[i] && weights[i] <= w1) {
-//                        bag1.add(0, i);
-//                        w1 -= weights[i];
-//                    } else if (difference == V2[i] && weights[i] <= w2) {
-//                        bag2.add(0, i);
-//                        w2 -= weights[i];
-                    if(weights[i] <= w1 && M[i][w1][w2] - M[i-1][w1 - weights[i]][w2] == difference && V1[i] == difference){
+                    if(weights[i] <= w1 && M[i][w1][w2] - M[i-1][w1 - weights[i]][w2] == V1[i]){
                         bag1.add(0, i);
                         w1 -= weights[i];
                     }
-                    else if(weights[i] <= w2 && M[i][w1][w2] - M[i-1][w1][w2 - weights[i]] == difference && V2[i] == difference){
+                    else if(weights[i] <= w2 && M[i][w1][w2] - M[i-1][w1][w2 - weights[i]] == V2[i]){
                         bag2.add(0, i);
                         w2 -= weights[i];
                     }
                     else {
-                        System.out.println("unexpected difference = " + difference);
+//                        System.out.println("unexpected difference = " + difference);
                     }
                 }
             }
